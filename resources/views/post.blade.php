@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laravel Ajax CRUD-Latihan</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         body {
             background-color: lightgray !important;
@@ -54,7 +55,10 @@
             </div>
         </div>
     </div>
+    @include('components.modal-create')
+    @include('components.modal-edit')
 
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
     </script>

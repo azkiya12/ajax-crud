@@ -4,9 +4,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">TAMBAH POST</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
 
@@ -33,7 +30,7 @@
 </div>
 
 <script>
-    //button create post event
+    //button create post event pada tombol TAMBAH->id
     $('body').on('click', '#btn-create-post', function () {
 
         //open modal
@@ -42,17 +39,18 @@
 
     //action create post
     $('#store').click(function(e) {
+
         e.preventDefault();
 
-        //define variable
+        //define variable terus isinya di ambil dari inputan->id form
         let title   = $('#title').val();
         let content = $('#content').val();
         let token   = $("meta[name='csrf-token']").attr("content");
         
-        //ajax
+        //ajax untuk proses send data ke dalam server
         $.ajax({
 
-            url: `/posts`,
+            url: '/posts',
             type: "POST",
             cache: false,
             data: {
@@ -61,8 +59,7 @@
                 "_token": token
             },
             success:function(response){
-
-                //show success message
+                //show success message menggunakan SweetAlertJs
                 Swal.fire({
                     type: 'success',
                     icon: 'success',
@@ -71,7 +68,7 @@
                     timer: 3000
                 });
 
-                //data post
+                // define variable post element row html
                 let post = `
                     <tr id="index_${response.data.id}">
                         <td>${response.data.title}</td>
@@ -83,7 +80,7 @@
                     </tr>
                 `;
                 
-                //append to table
+                //append to table untuk menerapkan element ke dalam <tbody id='table-posts'>
                 $('#table-posts').prepend(post);
                 
                 //clear form
@@ -92,11 +89,9 @@
 
                 //close modal
                 $('#modal-create').modal('hide');
-                
-
             },
             error:function(error){
-                
+                //jika input judul mengalami error maka
                 if(error.responseJSON.title[0]) {
 
                     //show alert
@@ -106,7 +101,7 @@
                     //add message to alert
                     $('#alert-title').html(error.responseJSON.title[0]);
                 } 
-
+                // jika input content mengalami error maka
                 if(error.responseJSON.content[0]) {
 
                     //show alert
@@ -116,7 +111,7 @@
                     //add message to alert
                     $('#alert-content').html(error.responseJSON.content[0]);
                 } 
-
+                console.log('Error pada:', error);
             }
 
         });

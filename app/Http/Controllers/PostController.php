@@ -40,4 +40,41 @@ class PostController extends Controller
             'data' => $post,
         ]);
     }
+
+    public function show(Post $post)
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail Post',
+            'data' => $post 
+        ]);
+    }
+
+    public function update(Request $request, Post $post)
+    {
+         //buat validasi
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        //cek jika validasi salah
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+            Log::info("error masuk");
+        }
+
+        //Update post
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        //return response
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil diupdate',
+            'data' => $post,
+        ]);
+    }
 }
