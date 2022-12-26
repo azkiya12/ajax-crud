@@ -59,9 +59,10 @@
                 "_token": token
             },
             success:function(response){
+                $('.modal').modal('hide');
                 //show success message menggunakan SweetAlertJs
                 Swal.fire({
-                    type: 'success',
+                    // type: 'success',
                     icon: 'success',
                     title: `${response.message}`,
                     showConfirmButton: false,

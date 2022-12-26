@@ -64,7 +64,7 @@
         let post_id = $('#post_id').val();
         let title = $('#title-edit').val();
         let content = $('#content-edit').val();
-        let token = $("#meta[name='csrf-token']").attr("content");
+        // let token = $("#meta[name='csrf-token']").attr("content");
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -82,14 +82,15 @@
             // jika proses PUT berhasil maka 
             // jalankan promise success
             success: function(response) {
+                $('.modal').modal('hide');
                 // console.log("sukses masuk");
                 //show success message
                 Swal.fire({
-                    type: 'success',
+                    // type: 'success',
                     icon: 'success',
                     title: `${response.message}`,
                     showConfirmButton: false,
-                    time: 2000
+                    timer: 2000
                 });
 
                 //data post element unutk me-replace row berdasarkan ID

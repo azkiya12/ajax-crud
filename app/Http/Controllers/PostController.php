@@ -77,4 +77,16 @@ class PostController extends Controller
             'data' => $post,
         ]);
     }
+
+    public function destroy($id)
+    {
+        // delete Post by ID
+        Post::Where('id',$id)->delete();
+
+        //return response
+        return response()->json([
+            'success'=>true, 
+            'message'=> 'Data post berhasil di hapus!.'
+        ]);
+    }
 }
