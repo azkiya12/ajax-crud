@@ -81,6 +81,8 @@
                     </tr>
                 `;
                 
+                // .append() puts data inside an element at the last index; while.
+                // .prepend() puts the prepending element at the first index.
                 //append to table untuk menerapkan element ke dalam <tbody id='table-posts'>
                 $('#table-posts').prepend(post);
                 
